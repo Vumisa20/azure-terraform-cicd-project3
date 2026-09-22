@@ -1,4 +1,4 @@
-name: Terraform CI
+name: Terraform CI/CD
 
 on:
   push:
@@ -10,10 +10,11 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
-  terraform-ci:
-    name: Terraform Format and Validate
+  terraform:
+    name: Terraform
     runs-on: ubuntu-latest
 
     steps:
@@ -25,11 +26,21 @@ jobs:
         with:
           terraform_version: "1.16.0"
 
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
 
       - name: Terraform Init
-        run: terraform init -backend=false
+        run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
