@@ -8,15 +8,15 @@ terraform {
     }
   }
 
- backend "azurerm" {
-  use_cli              = true
-  use_azuread_auth     = true
-  subscription_id      = "96221622-7554-4af1-b104-8d52e815e5f4"
-  resource_group_name  = "rg-nationwall-dev-001"
-  storage_account_name = "stnationwalltf001"
-  container_name       = "tfstate"
-  key                  = "nationwall-project3.tfstate"
-}
+  backend "azurerm" {
+    use_cli              = true
+    use_azuread_auth     = true
+    subscription_id      = "96221622-7554-4af1-b104-8d52e815e5f4"
+    resource_group_name  = "rg-nationwall-dev-001"
+    storage_account_name = "stnationwalltf001"
+    container_name       = "tfstate"
+    key                  = "nationwall-project3.tfstate"
+  }
 }
 provider "azurerm" {
   features {}
