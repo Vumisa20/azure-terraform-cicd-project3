@@ -6,17 +6,17 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.0"
     }
-  } 
+  }
 
   backend "azurerm" {
-  use_cli              = true
-  use_azuread_auth     = true
-  subscription_id      = "b2137b98-8067-4d97-ab44-4ee3fc0b4b1e"
-  resource_group_name  = "rg-nationwall-project3"
-  storage_account_name = "nwproject3tf20260921"
-  container_name       = "tfstate"
-  key                  = "nationwall-project3.tfstate"
- }
+    use_cli              = true
+    use_azuread_auth     = true
+    subscription_id      = "b2137b98-8067-4d97-ab44-4ee3fc0b4b1e"
+    resource_group_name  = "rg-nationwall-project3"
+    storage_account_name = "nwproject3tf20260921"
+    container_name       = "tfstate"
+    key                  = "nationwall-project3.tfstate"
+  }
 }
 provider "azurerm" {
   features {}
