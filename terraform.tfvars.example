@@ -1,0 +1,2 @@
+subscription_id      = "YOUR-AZURE-SUBSCRIPTION-ID"
+storage_account_name = "your-unique-storage-account-name"
