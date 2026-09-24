@@ -45,8 +45,13 @@ jobs:
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
 
-      - name: Terraform Init
+      - name: Terraform Init - Pull Request
+        if: github.event_name == 'pull_request'
         run: terraform init -backend=false
+
+      - name: Terraform Init - Main
+        if: github.event_name == 'push'
+        run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
