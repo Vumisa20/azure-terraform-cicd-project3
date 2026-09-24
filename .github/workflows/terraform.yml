@@ -35,6 +35,7 @@ jobs:
           terraform_version: "1.16.0"
 
       - name: Azure Login
+        if: github.event_name == 'push'
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -45,15 +46,17 @@ jobs:
         run: terraform fmt -check -recursive
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend=false
 
       - name: Terraform Validate
         run: terraform validate
 
       - name: Terraform Plan
+        if: github.event_name == 'push'
         run: terraform plan -out=tfplan
 
       - name: Upload Terraform Plan
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: terraform-plan
